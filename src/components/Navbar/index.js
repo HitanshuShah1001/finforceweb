@@ -16,7 +16,7 @@ const Navbar = ({ setToken }) => {
         <NavMenu>
           <NavLink to="/Enrolluser">Enroll User</NavLink>
           <NavLink to="/Enrollemployee">Enroll employee</NavLink>
-          <NavLink to="/Userlist">User list</NavLink>
+          <NavLink to="/Applicationlist">Applicationlist</NavLink>
           <NavLink to="/Employeelist">Employee list</NavLink>
           {/* Second Nav */}
           <button type="submit" onClick={() => setToken(null)}>

@@ -19,7 +19,7 @@ export default function Login({ setToken }) {
       .then((data) => data.json())
 
       .catch((error) => {
-        console.log(error);
+        console.log(error, "error");
       });
   }
 

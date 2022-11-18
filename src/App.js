@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import useToken from "./components/App/useToken";
 import Navbar from "./components/Navbar";
+import Applicationlist from "./components/Userlist/Userlist";
 function App() {
   const { token, setToken } = useToken();
 
@@ -21,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/Enrolluser" element={<Enrolluser />} />
         <Route path="/Enrollemployee" element={<Enrollemployee />} />
-        <Route path="/Userlist" element={<Userlist />} />
+        <Route path="/Applicationlist" element={<Applicationlist />} />
         <Route path="/Employeelist" element={<Employeelist />} />
       </Routes>
     </BrowserRouter>
