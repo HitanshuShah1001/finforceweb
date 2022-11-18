@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import useToken from "../App/useToken";
-
+import { Routes, Route, useNavigate } from "react-router-dom";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -32,6 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function Applicationlist() {
+  const navigate = useNavigate();
   const { token } = useToken();
   const [data, setData] = useState([]);
 
@@ -74,7 +75,10 @@ export default function Applicationlist() {
         </TableHead>
         <TableBody>
           {data.map((item) => (
-            <StyledTableRow key={item.Status}>
+            <StyledTableRow
+              key={item.Status}
+              onClick={() => navigate("/Applicationdetail")}
+            >
               <StyledTableCell component="th" scope="column" align="left">
                 <div>{item.User.Firstname + " " + item.User.Lastname}</div>
                 <div>{item.User.Phone}</div>

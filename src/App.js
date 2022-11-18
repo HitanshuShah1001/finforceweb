@@ -10,6 +10,7 @@ import Login from "./components/Login/Login";
 import useToken from "./components/App/useToken";
 import Navbar from "./components/Navbar";
 import Applicationlist from "./components/Userlist/Userlist";
+import Applicationdetail from "./components/Applicationdetail/Applicationdetail";
 function App() {
   const { token, setToken } = useToken();
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Enrollemployee" element={<Enrollemployee />} />
         <Route path="/Applicationlist" element={<Applicationlist />} />
         <Route path="/Employeelist" element={<Employeelist />} />
+        <Route path="/Applicationdetail" element={<Applicationdetail />} />
       </Routes>
     </BrowserRouter>
   );
