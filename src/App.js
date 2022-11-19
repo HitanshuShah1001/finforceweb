@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar";
 import Applicationlist from "./components/Userlist/Userlist";
 import Applicationdetail from "./components/Applicationdetail/Applicationdetail";
 import Productlist from "./components/Product/Productlist";
+import Productcreate from "./components/ProductCreate/Productcreate";
 function App() {
   const { token, setToken } = useToken();
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/Employeelist" element={<Employeelist />} />
         <Route path="/Applicationdetail" element={<Applicationdetail />} />
         <Route path="/Product" element={<Productlist />} />
+        <Route path="/ProductOperation" element={<Productcreate />} />
       </Routes>
     </BrowserRouter>
   );
