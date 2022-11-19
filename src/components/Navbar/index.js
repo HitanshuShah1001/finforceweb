@@ -7,7 +7,6 @@ import {
   NavBtn,
   NavBtnLink,
 } from "./NavbarElements";
-
 const Navbar = ({ setToken }) => {
   return (
     <>
@@ -19,7 +18,20 @@ const Navbar = ({ setToken }) => {
           <NavLink to="/Applicationlist">Applicationlist</NavLink>
           <NavLink to="/Employeelist">Employee list</NavLink>
           {/* Second Nav */}
-          <button type="submit" onClick={() => setToken(null)}>
+          <button
+            style={{
+              backgroundColor: "black",
+              width: 90,
+              borderRadius: 20,
+              borderColor: "white",
+              color: "white",
+              position: "absolute",
+              right: 15,
+              height: 40,
+            }}
+            type="submit"
+            onClick={() => setToken(null)}
+          >
             Logout
           </button>
         </NavMenu>
