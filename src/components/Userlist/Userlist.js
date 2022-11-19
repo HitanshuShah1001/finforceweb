@@ -77,7 +77,7 @@ export default function Applicationlist() {
           {data.map((item) => (
             <StyledTableRow
               key={item.Status}
-              onClick={() => navigate("/Applicationdetail")}
+              onClick={() => navigate("/Applicationdetail", { state: item })}
             >
               <StyledTableCell component="th" scope="column" align="left">
                 <div>{item.User.Firstname + " " + item.User.Lastname}</div>
