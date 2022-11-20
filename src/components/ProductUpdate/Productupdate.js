@@ -27,7 +27,7 @@ export default function Productupdate() {
   const [Banks, setBanks] = useState([]);
   const [BankId, setBankId] = useState();
 
-  const { token, setToken } = useToken();
+  const { token } = useToken();
 
   useEffect(() => {
     axios

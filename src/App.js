@@ -14,7 +14,7 @@ import Applicationdetail from "./components/Applicationdetail/Applicationdetail"
 import Productlist from "./components/Product/Productlist";
 import Productcreate from "./components/ProductCreate/Productcreate";
 import Productupdate from "./components/ProductUpdate/Productupdate";
-import Pendinguser from "./components/PendingUsers/Pendinguser";
+import Users from "./components/Users/Users";
 function App() {
   const { token, setToken } = useToken();
 
@@ -33,7 +33,7 @@ function App() {
         <Route path="/Product" element={<Productlist />} />
         <Route path="/ProductOperation" element={<Productcreate />} />
         <Route path="/ProductUpdate" element={<Productupdate />} />
-        <Route path="/PendingUser" element={<Pendinguser />} />
+        <Route path="/Users" element={<Users />} />
       </Routes>
     </BrowserRouter>
   );

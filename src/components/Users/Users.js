@@ -1,7 +1,4 @@
-// import axios from "axios";
-// import React, { useEffect } from "react";
-// import { useState } from "react";
-// import useToken from "../App/useToken";
+/* eslint-disable no-undef */
 
 import * as React from "react";
 import PropTypes from "prop-types";
@@ -28,16 +25,6 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import useToken from "../App/useToken";
 import axios from "axios";
-
-function createData(name, calories, fat, carbs, protein) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -148,7 +135,28 @@ function EnhancedTableHead(props) {
 }
 
 function EnhancedTableToolbar(props) {
-  const { numSelected } = props;
+  const { numSelected, selected, setRefresh, refresh } = props;
+
+  const { token } = useToken();
+  const Statusupdate = async (status) => {
+    console.log("Press");
+
+    console.log("Entering EE");
+    axios
+      .post("http://localhost:3000/user/update", {
+        token,
+        Status: status,
+        UserIds: selected,
+      })
+      .then((response) => {
+        console.log(response, "Response user update");
+        alert("Updated Succesfully!");
+        setRefresh(!refresh);
+      })
+      .catch((error) => {
+        console.log(error, "An error occured!");
+      });
+  };
 
   return (
     <Toolbar
@@ -186,16 +194,64 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <>
-          <Typography>Register</Typography>
-          <Typography style={{ marginLeft: 10 }}>Reject</Typography>
+          <button
+            onClick={() => Statusupdate("Registered")}
+            style={{
+              backgroundColor: "white",
+              width: 90,
+              borderRadius: 20,
+              borderColor: "black",
+              color: "black",
+              marginRight: 20,
+              height: 40,
+            }}
+          >
+            Register
+          </button>
+          <button
+            onClick={() => Statusupdate("Rejected")}
+            style={{
+              backgroundColor: "white",
+              width: 90,
+              borderRadius: 20,
+              borderColor: "black",
+              color: "black",
+              marginRight: 20,
+              height: 40,
+            }}
+          >
+            Reject
+          </button>
+          <button
+            style={{
+              backgroundColor: "white",
+              width: 90,
+              borderRadius: 20,
+              borderColor: "black",
+              color: "black",
+              marginRight: 20,
+              height: 40,
+            }}
+            onClick={() => Statusupdate("Pending")}
+          >
+            Pending
+          </button>
         </>
       ) : null}
     </Toolbar>
   );
 }
 
-export default function Pendinguser() {
+export default function Users() {
   const { token } = useToken();
+
+  const [rows, setRows] = React.useState([]);
+  const [order, setOrder] = React.useState("asc");
+  const [orderBy, setOrderBy] = React.useState("Firstname");
+  const [selected, setSelected] = React.useState([]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [refresh, setRefresh] = React.useState(false);
 
   React.useEffect(() => {
     axios
@@ -207,17 +263,10 @@ export default function Pendinguser() {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
-
-  const [rows, setRows] = React.useState([]);
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  }, [refresh]);
 
   const handleRequestSort = (event, property) => {
+    console.log(property, "Prop");
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
@@ -271,13 +320,14 @@ export default function Pendinguser() {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar
+          numSelected={selected.length}
+          selected={selected}
+          refresh={refresh}
+          setRefresh={setRefresh}
+        />
         <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
-          >
+          <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
             <EnhancedTableHead
               numSelected={selected.length}
               order={order}
@@ -331,7 +381,7 @@ export default function Pendinguser() {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />
