@@ -18,6 +18,7 @@ const Navbar = ({ setToken }) => {
           <NavLink to="/Applicationlist">Applicationlist</NavLink>
           <NavLink to="/Employeelist">Employee list</NavLink>
           <NavLink to="/Product">Product </NavLink>
+          <NavLink to="/PendingUser">PendingUser </NavLink>
           {/* Second Nav */}
           <button
             style={{

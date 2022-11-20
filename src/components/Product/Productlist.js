@@ -47,7 +47,6 @@ export default function Productlist() {
             height: 40,
           }}
           type="submit"
-          onClick={() => navigate("/ProductOperation")}
         >
           Create Product
         </button>
@@ -74,7 +73,7 @@ export default function Productlist() {
               justifyContent: "center",
               marginTop: 10,
             }}
-            onClick={() => navigate("/ProductOperation", { state: item })}
+            onClick={() => navigate("/ProductUpdate", { state: item })}
           >
             <div style={{ marginTop: 20 }}>
               <img
