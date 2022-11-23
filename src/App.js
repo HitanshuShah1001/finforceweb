@@ -25,7 +25,7 @@ function App() {
     <BrowserRouter>
       <Navbar setToken={setToken} />
       <Routes>
-        <Route path="/Enrolluser" element={<Enrolluser />} />
+        <Route path="/" element={<Enrolluser />} />
         <Route path="/Enrollemployee" element={<Enrollemployee />} />
         <Route path="/Applicationlist" element={<Applicationlist />} />
         <Route path="/Employeelist" element={<Employeelist />} />

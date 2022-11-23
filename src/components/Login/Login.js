@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./login.module.css";
 import img from "../../Assets/FFlogo.jpg";
-
+import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 export default function Login({ setToken }) {
@@ -26,7 +26,6 @@ export default function Login({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = await Loginuser(email, password);
-    console.log(data, "Dataaa");
     setToken(data.token);
   };
   const [email, setEmail] = useState();
