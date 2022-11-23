@@ -10,7 +10,7 @@ export default function Enrollemployee() {
   const [Firstname, setFirstname] = useState("Hitanshu");
   const [Lastname, setLastname] = useState("Shah");
   const [Email, setEmail] = useState("hitanshushah5@gmail.com");
-  const [Phone, setPhone] = useState("+91 7227950335");
+  const [Phone, setPhone] = useState("");
   const [UserType, setUserType] = useState("Inhouse");
   const [DOB, setDOB] = useState("2001-01-10");
   const [Aadhar, setAadhar] = useState();
@@ -78,7 +78,7 @@ export default function Enrollemployee() {
             </div>
             <div className={styles.loginFormItem}>
               <label htmlFor="Email" className={styles.label}>
-                Lastname
+                Email
               </label>
               <input
                 type="Email"
@@ -122,9 +122,8 @@ export default function Enrollemployee() {
                 onChange={(e) => setUserType(e.target.value)}
                 value={UserType}
               >
-                <option value="Inhouse">Inhouse</option>
-                <option value="Employee-1">Employee-1</option>
-                <option value="Employee-2">Employee-2</option>
+                <option value="Interanl">Internal</option>
+                <option value="External">External</option>
               </select>
             </div>
             <div className={styles.loginFormItem}>

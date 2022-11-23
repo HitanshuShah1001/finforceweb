@@ -255,7 +255,7 @@ export default function Users() {
 
   React.useEffect(() => {
     axios
-      .post("http://localhost:3000/user/list", { token })
+      .post("http://localhost:3000/user/list", { token, skip: 0, limit: 10000 })
       .then((res) => {
         setRows(res.data.users);
         console.log(res, "Response from PAI");

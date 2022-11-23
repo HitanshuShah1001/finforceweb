@@ -46,6 +46,8 @@ export default function Applicationlist() {
         token,
         resolveProduct: true,
         resolveUser: true,
+        skip: 0,
+        limit: 10000,
       }),
     })
       .then((data) => data.json())
@@ -80,8 +82,10 @@ export default function Applicationlist() {
               onClick={() => navigate("/Applicationdetail", { state: item })}
             >
               <StyledTableCell component="th" scope="column" align="left">
-                <div>{item.User.Firstname + " " + item.User.Lastname}</div>
-                <div>{item.User.Phone}</div>
+                <div>{`${item?.User?.Firstname ?? "Hitanshu"} ${
+                  item?.User?.Lastname ?? "Shah"
+                }`}</div>
+                <div>{`${item?.User?.Phone ?? "9137173437"}`}</div>
               </StyledTableCell>
 
               <StyledTableCell align="left">
