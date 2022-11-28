@@ -15,6 +15,7 @@ import Productlist from "./components/Product/Productlist";
 import Productcreate from "./components/ProductCreate/Productcreate";
 import Productupdate from "./components/ProductUpdate/Productupdate";
 import Users from "./components/Users/Users";
+import Subadmin from "./components/Subadmin/Subadmin";
 function App() {
   const { token, setToken } = useToken();
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/ProductOperation" element={<Productcreate />} />
         <Route path="/ProductUpdate" element={<Productupdate />} />
         <Route path="/Users" element={<Users />} />
+        <Route path="/Subadmin" element={<Subadmin />} />
       </Routes>
     </BrowserRouter>
   );

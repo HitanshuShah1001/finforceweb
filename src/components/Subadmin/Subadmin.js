@@ -61,6 +61,7 @@ const headCells = [
     disablePadding: false,
     label: "Lastname",
   },
+
   {
     id: "Phone",
     numeric: true,
@@ -68,10 +69,9 @@ const headCells = [
     label: "Phone",
   },
   {
-    id: "Status",
-    numeric: true,
+    id: "Email",
     disablePadding: false,
-    label: "Status",
+    label: "Email",
   },
 ];
 
@@ -105,7 +105,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
+            align={headCell.numeric ? "center" : "center"}
             padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -136,20 +136,20 @@ function EnhancedTableToolbar(props) {
     console.log("Press");
 
     console.log("Entering EE");
-    axios
-      .post("http://localhost:3000/user/update", {
-        token,
-        Status: status,
-        UserIds: selected,
-      })
-      .then((response) => {
-        console.log(response, "Response user update");
-        alert("Updated Succesfully!");
-        setRefresh(!refresh);
-      })
-      .catch((error) => {
-        console.log(error, "An error occured!");
-      });
+    // axios
+    //   .post("http://localhost:3000/user/update", {
+    //     token,
+    //     Status: status,
+    //     UserIds: selected,
+    //   })
+    //   .then((response) => {
+    //     console.log(response, "Response user update");
+    //     alert("Updated Succesfully!");
+    //     setRefresh(!refresh);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error, "An error occured!");
+    //   });
   };
 
   return (
@@ -176,20 +176,41 @@ function EnhancedTableToolbar(props) {
           {numSelected} selected
         </Typography>
       ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
+        <div
+          style={{
+            marginBottom: 10,
+            marginLeft: 2,
+            marginRight: 25,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 20,
+            justifyContent: "space-between",
+          }}
         >
-          User list
-        </Typography>
+          <h5 style={{ color: "black", fontWeight: "500" }}>Sub-admins</h5>
+          <button
+            style={{
+              backgroundColor: "white",
+              width: 150,
+              borderRadius: 20,
+              borderColor: "black",
+              color: "black",
+              position: "absolute",
+              right: 15,
+              height: 40,
+            }}
+            type="submit"
+          >
+            Create SubAdmin
+          </button>
+        </div>
       )}
 
       {numSelected > 0 ? (
         <>
           <button
-            onClick={() => Statusupdate("Registered")}
+            onClick={() => Statusupdate("Remove")}
             style={{
               backgroundColor: "white",
               width: 90,
@@ -200,35 +221,7 @@ function EnhancedTableToolbar(props) {
               height: 40,
             }}
           >
-            Register
-          </button>
-          <button
-            onClick={() => Statusupdate("Rejected")}
-            style={{
-              backgroundColor: "white",
-              width: 90,
-              borderRadius: 20,
-              borderColor: "black",
-              color: "black",
-              marginRight: 20,
-              height: 40,
-            }}
-          >
-            Reject
-          </button>
-          <button
-            style={{
-              backgroundColor: "white",
-              width: 90,
-              borderRadius: 20,
-              borderColor: "black",
-              color: "black",
-              marginRight: 20,
-              height: 40,
-            }}
-            onClick={() => Statusupdate("Pending")}
-          >
-            Pending
+            Remove
           </button>
         </>
       ) : null}
@@ -236,7 +229,7 @@ function EnhancedTableToolbar(props) {
   );
 }
 
-export default function Users() {
+export default function Subadmin() {
   const { token } = useToken();
 
   const [rows, setRows] = React.useState([]);
@@ -244,15 +237,20 @@ export default function Users() {
   const [orderBy, setOrderBy] = React.useState("Firstname");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [refresh, setRefresh] = React.useState(false);
 
   React.useEffect(() => {
     axios
-      .post("http://localhost:3000/user/list", { token, skip: 0, limit: 10000 })
+      .post("http://localhost:3000/admin/list", {
+        token,
+        skip: 0,
+        limit: 10000,
+        Type: "Admin",
+      })
       .then((res) => {
-        setRows(res.data.users);
         console.log(res, "Response from PAI");
+        setRows(res.data.admins);
       })
       .catch((e) => {
         console.log(e);
@@ -260,7 +258,6 @@ export default function Users() {
   }, [refresh]);
 
   const handleRequestSort = (event, property) => {
-    console.log(property, "Prop");
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
@@ -268,7 +265,6 @@ export default function Users() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      console.log(rows, "N");
       const newSelected = rows.map((n) => n._id);
       setSelected(newSelected);
       return;
@@ -363,12 +359,13 @@ export default function Users() {
                         id={labelId}
                         scope="row"
                         padding="none"
+                        align="center"
                       >
                         {row.Firstname}
                       </TableCell>
-                      <TableCell align="right">{row.Lastname}</TableCell>
-                      <TableCell align="right">{row.Phone}</TableCell>
-                      <TableCell align="right">{row.Status}</TableCell>
+                      <TableCell align="center">{row.Lastname}</TableCell>
+                      <TableCell align="center">{row.Phone}</TableCell>
+                      <TableCell align="center">{row.Email}</TableCell>
                     </TableRow>
                   );
                 })}
