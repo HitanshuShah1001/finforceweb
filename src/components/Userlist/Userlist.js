@@ -20,7 +20,7 @@ import { visuallyHidden } from "@mui/utils";
 import useToken from "../App/useToken";
 import axios from "axios";
 import Subadminlist from "./Subadminlist";
-
+import { useNavigate } from "react-router-dom";
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -139,25 +139,6 @@ function EnhancedTableToolbar(props) {
   const { numSelected, selected, setRefresh, refresh, handleOpen } = props;
 
   const { token } = useToken();
-  const Statusupdate = async (status) => {
-    console.log("Press");
-
-    console.log("Entering EE");
-    // axios
-    //   .post("http://localhost:3000/user/update", {
-    //     token,
-    //     Status: status,
-    //     UserIds: selected,
-    //   })
-    //   .then((response) => {
-    //     console.log(response, "Response user update");
-    //     alert("Updated Succesfully!");
-    //     setRefresh(!refresh);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error, "An error occured!");
-    //   });
-  };
 
   return (
     <Toolbar
@@ -225,6 +206,7 @@ function EnhancedTableToolbar(props) {
 
 export default function Applicationlist() {
   const { token } = useToken();
+  const navigate = useNavigate();
 
   const [rows, setRows] = React.useState([]);
   const [order, setOrder] = React.useState("asc");
@@ -245,13 +227,10 @@ export default function Applicationlist() {
         resolveProduct: true,
       })
       .then((res) => {
-        console.log(res, "Response from API");
         setRows(res.data.applications);
         // setRows(res.data.admins);
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
   }, []);
 
   const handleRequestSort = (event, property) => {
@@ -340,7 +319,9 @@ export default function Applicationlist() {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row._id)}
+                      onClick={() =>
+                        navigate("/Applicationdetail", { state: row })
+                      }
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -354,6 +335,7 @@ export default function Applicationlist() {
                           inputProps={{
                             "aria-labelledby": labelId,
                           }}
+                          onClick={(event) => handleClick(event, row._id)}
                         />
                       </TableCell>
                       <TableCell align="center">{row.Product.Name}</TableCell>

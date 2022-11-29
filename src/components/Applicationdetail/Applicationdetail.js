@@ -14,11 +14,16 @@ export default function Applicationdetail() {
   console.log(location, "Location");
   const navigate = useNavigate();
   const { token } = useToken();
-  const { Firstname, Lastname, Phone, Email } = location.state.User;
+  // const {
+  //   Firstname = "Hitanshu",
+  //   Lastname = "Shah",
+  //   Phone = "7227950335",
+  //   Email = "hitanshushah5@gmail.com",
+  // } = location?.state?.User;
   const { CoverImage: Photo, BankName, Name } = location.state.Product;
   const { Status, StatusJustification } = location.state;
-  const [status, setStatus] = React.useState("");
-  const [feedback, setFeedback] = useState("");
+  const [status, setStatus] = React.useState(location.state.Status);
+  const [feedback, setFeedback] = useState(location.state.StatusJustification);
 
   const handleChange = (event) => {
     setStatus(event.target.value);
@@ -72,9 +77,9 @@ export default function Applicationdetail() {
             <h3 style={{ color: "white", marginTop: 10 }}>User Info</h3>
           </div>
           <div style={{ marginTop: 20 }}>
-            <h5 style={{ color: "white" }}>{Firstname + " " + Lastname}</h5>
+            {/* <h5 style={{ color: "white" }}>{Firstname + " " + Lastname}</h5>
             <h6 style={{ color: "white" }}>{Phone}</h6>
-            <h6 style={{ color: "white" }}>{Email}</h6>
+            <h6 style={{ color: "white" }}>{Email}</h6> */}
           </div>
         </div>
         <div

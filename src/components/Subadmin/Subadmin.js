@@ -19,7 +19,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { visuallyHidden } from "@mui/utils";
 import useToken from "../App/useToken";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -129,6 +129,7 @@ function EnhancedTableHead(props) {
 }
 
 function EnhancedTableToolbar(props) {
+  const navigate = useNavigate();
   const { numSelected, selected, setRefresh, refresh } = props;
 
   const { token } = useToken();
@@ -201,6 +202,7 @@ function EnhancedTableToolbar(props) {
               height: 40,
             }}
             type="submit"
+            onClick={() => navigate("/CreateSubadmin")}
           >
             Create SubAdmin
           </button>
@@ -239,6 +241,7 @@ export default function Subadmin() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [refresh, setRefresh] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     axios

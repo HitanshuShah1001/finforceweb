@@ -10,7 +10,6 @@ export default function Subadminlist({ open, setOpen, Ids }) {
   const { token } = useToken();
   const [admins, setAdmins] = useState([]);
   const [selectedsubadmin, setSelectedsubadmin] = useState("");
-  console.log(Ids);
   const assigntosubadmin = () => {
     axios
       .post("http://localhost:3000/application/assign", {
@@ -40,7 +39,6 @@ export default function Subadminlist({ open, setOpen, Ids }) {
         Type: "Admin",
       })
       .then((res) => {
-        console.log(res, "Response from PAI");
         setAdmins(res.data.admins);
       })
       .catch((e) => {

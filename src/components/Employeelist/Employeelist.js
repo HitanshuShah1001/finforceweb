@@ -36,6 +36,7 @@ export default function Employeelist() {
 
   useEffect(() => {
     async function fetchEmployeelist() {
+      console.log(token);
       let response = await axios.post("http://localhost:3000/employee/list", {
         token,
       });
