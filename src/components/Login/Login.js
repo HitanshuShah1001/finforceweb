@@ -3,8 +3,10 @@ import styles from "./login.module.css";
 import img from "../../Assets/FFlogo.jpg";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import User from "../../UserContext/Usercontext";
 
 export default function Login({ setToken }) {
+  const { Usertype, setUsertype } = React.useContext(User);
   async function Loginuser(email, password) {
     return fetch("http://localhost:3000/admin/login", {
       method: "POST",
@@ -26,6 +28,8 @@ export default function Login({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = await Loginuser(email, password);
+    console.log("uSERTYPE", data.user.Type);
+    setUsertype(data?.user?.Type);
     setToken(data.token);
   };
   const [email, setEmail] = useState();

@@ -17,30 +17,37 @@ import Productupdate from "./components/ProductUpdate/Productupdate";
 import Users from "./components/Users/Users";
 import Subadmin from "./components/Subadmin/Subadmin";
 import Createsubadmin from "./components/Subadmin/Createsubadmin";
+import User from "./UserContext/Usercontext";
 function App() {
   const { token, setToken } = useToken();
-
+  const [Usertype, setUsertype] = useState("Admin");
   if (!token) {
-    return <Login setToken={setToken} />;
+    return (
+      <User.Provider value={{ Usertype, setUsertype }}>
+        <Login setToken={setToken} />
+      </User.Provider>
+    );
   }
   return (
-    <BrowserRouter>
-      <Navbar setToken={setToken} />
-      <Routes>
-        <Route path="/" element={<Enrolluser />} />
-        <Route path="/Enrollemployee" element={<Enrollemployee />} />
-        <Route path="/Applicationlist" element={<Applicationlist />} />
-        <Route path="/Employeelist" element={<Employeelist />} />
-        <Route path="/Applicationdetail" element={<Applicationdetail />} />
-        <Route path="/Product" element={<Productlist />} />
-        <Route path="/ProductOperation" element={<Productcreate />} />
-        <Route path="/ProductUpdate" element={<Productupdate />} />
-        <Route path="/Users" element={<Users />} />
-        <Route path="/Subadmin" element={<Subadmin />} />
-        <Route path="/Createsubadmin" element={<Createsubadmin />} />
-        {/* <Route path="/Applicationdetail" element={<Applicationdetail />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <User.Provider value={{ Usertype, setUsertype }}>
+      <BrowserRouter>
+        <Navbar setToken={setToken} />
+        <Routes>
+          <Route path="/" element={<Enrolluser />} />
+          <Route path="/Enrollemployee" element={<Enrollemployee />} />
+          <Route path="/Applicationlist" element={<Applicationlist />} />
+          <Route path="/Employeelist" element={<Employeelist />} />
+          <Route path="/Applicationdetail" element={<Applicationdetail />} />
+          <Route path="/Product" element={<Productlist />} />
+          <Route path="/ProductOperation" element={<Productcreate />} />
+          <Route path="/ProductUpdate" element={<Productupdate />} />
+          <Route path="/Users" element={<Users />} />
+          <Route path="/Subadmin" element={<Subadmin />} />
+          <Route path="/Createsubadmin" element={<Createsubadmin />} />
+          {/* <Route path="/Applicationdetail" element={<Applicationdetail />} /> */}
+        </Routes>
+      </BrowserRouter>
+    </User.Provider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import User from "../../UserContext/Usercontext";
 import {
   Nav,
   NavLink,
@@ -8,6 +9,8 @@ import {
   NavBtnLink,
 } from "./NavbarElements";
 const Navbar = ({ setToken }) => {
+  const { Usertype } = React.useContext(User);
+  console.log(Usertype);
   return (
     <>
       <Nav>
@@ -19,7 +22,10 @@ const Navbar = ({ setToken }) => {
           <NavLink to="/Employeelist">Employee list</NavLink>
           <NavLink to="/Product">Product </NavLink>
           <NavLink to="/Users">Users </NavLink>
-          <NavLink to="/Subadmin">Sub-Admin</NavLink>
+          {Usertype === "SuperAdmin" && (
+            <NavLink to="/Subadmin">Sub-Admin</NavLink>
+          )}
+
           {/* Second Nav */}
           <button
             style={{
