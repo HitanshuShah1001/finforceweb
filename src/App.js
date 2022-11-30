@@ -45,6 +45,7 @@ function App() {
           <Route path="/Users" element={<Users />} />
           <Route path="/Subadmin" element={<Subadmin />} />
           <Route path="/Createsubadmin" element={<Createsubadmin />} />
+          <Route path="/ProductCreate" element={<Productcreate />} />
         </Routes>
       </BrowserRouter>
     </User.Provider>

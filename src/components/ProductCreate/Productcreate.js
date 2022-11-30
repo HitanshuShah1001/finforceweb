@@ -25,7 +25,7 @@ export default function Productcreate() {
   const [Banks, setBanks] = useState([]);
   const [BankId, setBankId] = useState();
 
-  const { token, setToken } = useToken();
+  const { token } = useToken();
 
   useEffect(() => {
     axios
@@ -33,21 +33,21 @@ export default function Productcreate() {
         token,
       })
       .then((banks) => {
-        setBanks(banks.banks);
+        console.log(banks.data.banks, "Banks");
+        setBanks(banks.data.banks);
       });
   }, []);
 
   const options = ["one", "two", "three"];
-  const defaultOption = options[0];
 
   const handleChange = (event) => {
+    console.log(event.target.value);
     setBankId(event.target.value);
     setBankName(bankMapper[event.target.value]);
   };
 
   const ee = async (e) => {
     e.preventDefault();
-    console.log("Press");
     let data = new FormData();
     data.append("BankName", BankName);
     data.append("Name", Name);
@@ -59,7 +59,6 @@ export default function Productcreate() {
     data.append("token", token);
     data.append("BankId", BankId);
     e.preventDefault();
-    console.log("Entering EE");
     axios
       .post("http://localhost:3000/product/create", data, {
         headers: {
@@ -81,6 +80,7 @@ export default function Productcreate() {
         <Box style={{ width: "90%", alignSelf: "center", marginBottom: 20 }}>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Bank</InputLabel>
+
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -89,13 +89,9 @@ export default function Productcreate() {
               onChange={handleChange}
               style={{ borderRadius: 20 }}
             >
-              <MenuItem value={"634da324cb6b2ee63894f1fa"}>ICICI</MenuItem>
-              <MenuItem value={"634da333cb6b2ee63894f1fd"}>Axis</MenuItem>
-              <MenuItem value={"634da33ecb6b2ee63894f200"}>HDFC</MenuItem>
-              <MenuItem value={"634da34ccb6b2ee63894f203"}>IDFC</MenuItem>
-              <MenuItem value={"634da359cb6b2ee63894f206"}>
-                Kotak Mahindra
-              </MenuItem>
+              {Banks.map((item) => (
+                <MenuItem value={item._id}>{item.Name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>

@@ -13,7 +13,6 @@ export default function Productlist() {
         token,
       })
       .then((data) => {
-        console.log(data.data.products, "Response");
         setProducts(data.data.products);
       })
       .catch((error) => {
@@ -47,6 +46,7 @@ export default function Productlist() {
             height: 40,
           }}
           type="submit"
+          onClick={() => navigate("/ProductCreate")}
         >
           Create Product
         </button>

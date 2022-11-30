@@ -15,7 +15,7 @@ import "react-dropdown/style.css";
 import { bankMapper } from "../../Helpers/Mapper";
 export default function Productupdate() {
   const location = useLocation();
-
+  console.log(location, "Location");
   const navigate = useNavigate();
   const [BankName, setBankName] = useState(location.state.BankName);
   const [Name, setName] = useState(location.state.Name);
@@ -25,7 +25,7 @@ export default function Productupdate() {
   const [EmployeeCut, setEmployeeCut] = useState(location?.state?.EmployeeCut);
   const [Description, setDescription] = useState(location.state.Description);
   const [Banks, setBanks] = useState([]);
-  const [BankId, setBankId] = useState();
+  const [BankId, setBankId] = useState(location.state.BankId);
 
   const { token } = useToken();
 
@@ -35,12 +35,11 @@ export default function Productupdate() {
         token,
       })
       .then((banks) => {
-        setBanks(banks.banks);
+        setBanks(banks.data.banks);
       });
   }, []);
 
   const options = ["one", "two", "three"];
-  const defaultOption = options[0];
 
   const handleChange = (event) => {
     setBankId(event.target.value);
@@ -49,7 +48,6 @@ export default function Productupdate() {
 
   const ee = async (e) => {
     e.preventDefault();
-    console.log("Press");
     let data = new FormData();
     data.append("BankName", BankName);
     data.append("Name", Name);
@@ -63,7 +61,7 @@ export default function Productupdate() {
     e.preventDefault();
     console.log("Entering EE");
     axios
-      .post("http://localhost:3000/product/create", data, {
+      .post("http://localhost:3000/product/update", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -91,13 +89,9 @@ export default function Productupdate() {
               onChange={handleChange}
               style={{ borderRadius: 20 }}
             >
-              <MenuItem value={"634da324cb6b2ee63894f1fa"}>ICICI</MenuItem>
-              <MenuItem value={"634da333cb6b2ee63894f1fd"}>Axis</MenuItem>
-              <MenuItem value={"634da33ecb6b2ee63894f200"}>HDFC</MenuItem>
-              <MenuItem value={"634da34ccb6b2ee63894f203"}>IDFC</MenuItem>
-              <MenuItem value={"634da359cb6b2ee63894f206"}>
-                Kotak Mahindra
-              </MenuItem>
+              {Banks.map((item) => (
+                <MenuItem value={item._id}>{item.Name}</MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>
