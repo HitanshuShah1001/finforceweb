@@ -21,6 +21,7 @@ import useToken from "../App/useToken";
 import axios from "axios";
 import Subadminlist from "./Subadminlist";
 import { useNavigate } from "react-router-dom";
+import User from "../../UserContext/Usercontext";
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -206,6 +207,7 @@ function EnhancedTableToolbar(props) {
 
 export default function Applicationlist() {
   const { token } = useToken();
+  const { id, Usertype } = React.useContext(User);
   const navigate = useNavigate();
 
   const [rows, setRows] = React.useState([]);
@@ -225,6 +227,7 @@ export default function Applicationlist() {
         limit: 10000,
         resolveUser: true,
         resolveProduct: true,
+        ProcessorId: Usertype === "Admin" ? id : "",
       })
       .then((res) => {
         setRows(res.data.applications);

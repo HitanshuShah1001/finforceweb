@@ -21,15 +21,16 @@ import User from "./UserContext/Usercontext";
 function App() {
   const { token, setToken } = useToken();
   const [Usertype, setUsertype] = useState("Admin");
+  const [id, setId] = useState("");
   if (!token) {
     return (
-      <User.Provider value={{ Usertype, setUsertype }}>
+      <User.Provider value={{ Usertype, setUsertype, id, setId }}>
         <Login setToken={setToken} />
       </User.Provider>
     );
   }
   return (
-    <User.Provider value={{ Usertype, setUsertype }}>
+    <User.Provider value={{ Usertype, setUsertype, id, setId }}>
       <BrowserRouter>
         <Navbar setToken={setToken} />
         <Routes>
@@ -44,7 +45,6 @@ function App() {
           <Route path="/Users" element={<Users />} />
           <Route path="/Subadmin" element={<Subadmin />} />
           <Route path="/Createsubadmin" element={<Createsubadmin />} />
-          {/* <Route path="/Applicationdetail" element={<Applicationdetail />} /> */}
         </Routes>
       </BrowserRouter>
     </User.Provider>

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import User from "../../UserContext/Usercontext";
 
 export default function Login({ setToken }) {
-  const { Usertype, setUsertype } = React.useContext(User);
+  const { setUsertype, setId } = React.useContext(User);
   async function Loginuser(email, password) {
     return fetch("http://localhost:3000/admin/login", {
       method: "POST",
@@ -28,7 +28,7 @@ export default function Login({ setToken }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = await Loginuser(email, password);
-    console.log("uSERTYPE", data.user.Type);
+    setId(data?.user?._id);
     setUsertype(data?.user?.Type);
     setToken(data.token);
   };
