@@ -32,7 +32,6 @@ export default function Login({ setToken }) {
     setId(data?.user?._id);
     setUsertype(data?.user?.Type);
     setToken(data.token);
-    navigate("/Enrollemployee");
   };
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
