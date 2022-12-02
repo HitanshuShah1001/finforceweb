@@ -22,6 +22,7 @@ import axios from "axios";
 import Subadminlist from "./Subadminlist";
 import { useNavigate } from "react-router-dom";
 import User from "../../UserContext/Usercontext";
+import { styles } from "./styles";
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -165,18 +166,7 @@ function EnhancedTableToolbar(props) {
           {numSelected} selected
         </Typography>
       ) : (
-        <div
-          style={{
-            marginBottom: 10,
-            marginLeft: 2,
-            marginRight: 25,
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 20,
-            justifyContent: "space-between",
-          }}
-        >
+        <div style={styles.header}>
           <h5 style={{ color: "black", fontWeight: "500" }}>
             Application List
           </h5>
@@ -185,18 +175,7 @@ function EnhancedTableToolbar(props) {
 
       {numSelected > 0 ? (
         <>
-          <button
-            onClick={handleOpen}
-            style={{
-              backgroundColor: "white",
-              width: 90,
-              borderRadius: 20,
-              borderColor: "black",
-              color: "black",
-              marginRight: 20,
-              height: 40,
-            }}
-          >
+          <button onClick={handleOpen} style={styles.button}>
             Assign
           </button>
         </>
@@ -322,9 +301,6 @@ export default function Applicationlist() {
                   return (
                     <TableRow
                       hover
-                      onClick={() =>
-                        navigate("/Applicationdetail", { state: row })
-                      }
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
@@ -341,8 +317,20 @@ export default function Applicationlist() {
                           onClick={(event) => handleClick(event, row._id)}
                         />
                       </TableCell>
-                      <TableCell align="center">{row.Product.Name}</TableCell>
-                      <TableCell align="center">
+                      <TableCell
+                        align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
+                      >
+                        {row.Product.Name}
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
+                      >
                         {row.Product.BankName}
                       </TableCell>
                       <TableCell
@@ -351,6 +339,9 @@ export default function Applicationlist() {
                         scope="row"
                         padding="none"
                         align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
                       >
                         <img
                           src={`http://localhost:3000/${row.Product.CoverImage}`}
@@ -360,10 +351,23 @@ export default function Applicationlist() {
                         />
                       </TableCell>
 
-                      <TableCell align="center">
+                      <TableCell
+                        align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
+                      >
                         {row.createdAt.slice(0, 10)}
                       </TableCell>
-                      <TableCell align="center">{row.Status}</TableCell>
+                      <TableCell
+                        align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
+                      >
+                        {" "}
+                        {row.Status}
+                      </TableCell>
                     </TableRow>
                   );
                 })}

@@ -8020,6 +8020,13 @@
   dependencies:
     "loose-envify" "^1.1.0"
 
+"reactjs-stylesheet@^1.0.9":
+  "integrity" "sha512-2WKLR+J6wOCtJaYWYe36jYpRwvVerBtW3FWkcrNUC5COzYSsHpf4rBGqaej6MjSPMA5h0XbMtAoF/vNU6qnByQ=="
+  "resolved" "https://registry.npmjs.org/reactjs-stylesheet/-/reactjs-stylesheet-1.0.9.tgz"
+  "version" "1.0.9"
+  dependencies:
+    "@types/react" "^18.0.9"
+
 "read-cache@^1.0.0":
   "integrity" "sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA=="
   "resolved" "https://registry.npmjs.org/read-cache/-/read-cache-1.0.0.tgz"
