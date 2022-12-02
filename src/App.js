@@ -22,10 +22,15 @@ function App() {
   const { token, setToken } = useToken();
   const [Usertype, setUsertype] = useState("Admin");
   const [id, setId] = useState("");
+  console.log(token);
   if (!token) {
     return (
       <User.Provider value={{ Usertype, setUsertype, id, setId }}>
-        <Login setToken={setToken} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login setToken={setToken} />} />
+          </Routes>
+        </BrowserRouter>
       </User.Provider>
     );
   }

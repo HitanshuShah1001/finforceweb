@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import User from "../../UserContext/Usercontext";
 
 export default function Login({ setToken }) {
+  const navigate = useNavigate();
   const { setUsertype, setId } = React.useContext(User);
   async function Loginuser(email, password) {
     return fetch("http://localhost:3000/admin/login", {
@@ -31,6 +32,7 @@ export default function Login({ setToken }) {
     setId(data?.user?._id);
     setUsertype(data?.user?.Type);
     setToken(data.token);
+    navigate("/Enrollemployee");
   };
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();

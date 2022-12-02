@@ -8,7 +8,9 @@ import {
   NavBtn,
   NavBtnLink,
 } from "./NavbarElements";
+import { useNavigate } from "react-router-dom";
 const Navbar = ({ setToken }) => {
+  const navigate = useNavigate();
   const { Usertype } = React.useContext(User);
   console.log(Usertype);
   return (
@@ -16,7 +18,7 @@ const Navbar = ({ setToken }) => {
       <Nav>
         <Bars />
         <NavMenu>
-          <NavLink to="/">Enroll User</NavLink>
+          <NavLink to="/EnrollUser">Enroll User</NavLink>
           <NavLink to="/Enrollemployee">Enroll employee</NavLink>
           <NavLink to="/Applicationlist">Applicationlist</NavLink>
           <NavLink to="/Employeelist">Employee list</NavLink>
@@ -39,7 +41,10 @@ const Navbar = ({ setToken }) => {
               height: 40,
             }}
             type="submit"
-            onClick={() => setToken(null)}
+            onClick={() => {
+              setToken(null);
+              navigate("/");
+            }}
           >
             Logout
           </button>
