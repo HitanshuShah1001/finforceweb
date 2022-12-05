@@ -11,12 +11,12 @@ export default function Subadminlist({ open, setOpen, Ids }) {
   const [admins, setAdmins] = useState([]);
   const [selectedsubadmin, setSelectedsubadmin] = useState("");
   const assigntosubadmin = () => {
-    console.log(selectedsubadmin, "Selected sub admin");
+    console.log(selectedsubadmin, "Selected sub admin", Ids);
     axios
       .post("http://localhost:3000/application/assign", {
         token,
         ProcessorId: selectedsubadmin,
-        Ids,
+        ids: Ids,
       })
       .then((res) => {
         setOpen(false);

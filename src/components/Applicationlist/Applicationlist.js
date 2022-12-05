@@ -222,7 +222,7 @@ export default function Applicationlist() {
         // setRows(res.data.admins);
       })
       .catch((e) => {});
-  }, [refresh]);
+  }, [open]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

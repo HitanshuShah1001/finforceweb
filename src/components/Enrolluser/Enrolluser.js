@@ -55,13 +55,12 @@ export default function Enrollemployee() {
 
     axios
       .post("http://localhost:3000/user/create", {
-        token: userdata?.token,
+        token: token,
         Firstname,
         Lastname,
         Address,
         Landmark,
         MotherName,
-
         Phone,
         City,
         Email,
@@ -72,7 +71,6 @@ export default function Enrollemployee() {
         NetSalary,
         AadharCardNumber,
         PancardNumber,
-
         OfficeCity,
         OfficePincode,
         OfficeLandmark,
