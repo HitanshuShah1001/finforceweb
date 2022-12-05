@@ -18,7 +18,7 @@ const Navbar = ({ setToken }) => {
       <Nav>
         <Bars />
         <NavMenu>
-          <NavLink to="/EnrollUser">Enroll User</NavLink>
+          <NavLink to="/">Enroll User</NavLink>
           <NavLink to="/Enrollemployee">Enroll employee</NavLink>
           <NavLink to="/Applicationlist">Applicationlist</NavLink>
           <NavLink to="/Employeelist">Employee list</NavLink>

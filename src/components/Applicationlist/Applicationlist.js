@@ -82,6 +82,11 @@ const headCells = [
     disablePadding: false,
     label: "Status",
   },
+  {
+    id: "Assigned to",
+    disablePadding: false,
+    label: "Assigned to",
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -199,6 +204,7 @@ export default function Applicationlist() {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
+    console.log("Id", id);
     axios
       .post("http://localhost:3000/application/list", {
         token,
@@ -206,14 +212,17 @@ export default function Applicationlist() {
         limit: 10000,
         resolveUser: true,
         resolveProduct: true,
-        ProcessorId: Usertype === "Admin" ? id : "",
+        resolveProcessor: true,
+        ProcessorId: id,
       })
       .then((res) => {
+        console.log(res.data.applications);
+        setRefresh(!refresh);
         setRows(res.data.applications);
         // setRows(res.data.admins);
       })
       .catch((e) => {});
-  }, []);
+  }, [refresh]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -367,6 +376,14 @@ export default function Applicationlist() {
                       >
                         {" "}
                         {row.Status}
+                      </TableCell>
+                      <TableCell
+                        align="center"
+                        onClick={() =>
+                          navigate("/Applicationdetail", { state: row })
+                        }
+                      >
+                        {row.Processor.Firstname}
                       </TableCell>
                     </TableRow>
                   );
