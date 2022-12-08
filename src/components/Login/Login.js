@@ -45,6 +45,7 @@ export default function Login({ setToken }) {
               width="170px"
               height={170}
               style={{ alignSelf: "center" }}
+              alt="FFlogo"
             />
             <div style={{ marginTop: "40px" }}>
               <div className={styles.loginFormItem}>
